@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Go Bookstore</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-dark">
+      <div class="container">
+        <a class="navbar-brand text-light" href="/">Go Bookstore</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active text-light" href="/books">Books</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active text-light" href="/genres">Genres</a>
+              </li>
+            <li class="nav-item">
+              <a class="nav-link active text-light" href="/transactions">Transactions</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active text-light" href="/staff">Staff</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  <!-- End of navbar -->
+    <div class="container mt-3">
+        <div class="row d-flex justify-content-center">
+            <div class="col-4">
+                <h2>Book Details</h2>
+                <hr>
+                <form action="/books/detail" method="POST">
+                        <div class="mb-3">
+                        <div class="form-floating">
+                            <input type="text" name="title" class="form-control" id="floatingInputGrid" placeholder="" value="{{ .books.Title }}">
+                            <label for="floatingInputGrid">Book Title</label>
+                        </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-floating">
+                            <input type="text" name="author" class="form-control" id="floatingInputGrid" placeholder="" value="{{ books.Author.Name }}">
+                            <label for="floatingInputGrid">Author Name</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-floating">
+                            <input type="text" name="publisher" class="form-control" id="floatingInputGrid" placeholder="" value="{{ books.Publisher.Name }}">
+                            <label for="floatingInputGrid">Publisher Company</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <input type="text" name="title" class="form-control" id="floatingInputGrid" placeholder="" value="{{ .books.Genres.Name }}">
+                                <label for="floatingInputGrid">Genre</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-floating">
+                            <input type="date" name="publication_date" class="form-control" id="floatingInputGrid" placeholder="" value="{{ .books.PublicationDate }}">
+                            <label for="floatingInputGrid">Publication Date</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-floating">
+                            <input type="text" name="isbn" class="form-control" id="floatingInputGrid" placeholder="" value="{{ .books.ISBN }}">
+                            <label for="floatingInputGrid">ISBN</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-floating">
+                            <input type="number" name="price" class="form-control" id="floatingInputGrid" placeholder="" value="{{ .books.Price }}">
+                            <label for="floatingInputGrid">Price</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-floating">
+                            <input type="number" name="stock_qty" class="form-control" id="floatingInputGrid" placeholder="" value="{{ .books.StockQty }}">
+                            <label for="floatingInputGrid">Stock Quantity</label>
+                            </div>
+                        </div>
+                        <div class="float-end">
+                            <a href="/books" class="btn btn-secondary">Back</a>
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  </body>
+</html>
