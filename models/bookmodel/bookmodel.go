@@ -59,6 +59,35 @@ func GetAll() []entities.Books {
 func Create(book entities.Books) bool {
 
 	result, err := config.DB.Exec(`
+		INSERT INTO authors(
+			name
+		) VALUES (?)`,
+		book.Author.Name,
+	)
+
+	result, err = config.DB.Exec(`
+		INSERT INTO publishers(
+			name
+		) VALUES (?)`,
+		book.Publisher.Name,
+	)
+
+	row := config.DB.QueryRow(`
+		SELECT authors.id  FROM authors
+		WHERE authors.name = ?
+	`, book.Author.Name)
+
+	var author entities.Authors
+
+	err := row.Scan(
+		&author.Id,
+	)
+
+	if err != nil {
+		panic(err)
+	}
+
+	result, err = config.DB.Exec(`
 		INSERT INTO books(
 			title, author_id, publisher_id, genre_id, publication_date, ISBN, price, stock_qty, created_at, updated_at
 		) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
@@ -101,9 +130,9 @@ func Detail(id int) entities.Books {
 			books.stock_qty,
 			books.created_at, 
 			books.updated_at FROM books
-		JOIN authors ON books.author_id = authors.id,
-		JOIN publishers ON books.publisher_id = publishers.id
-		JOIN genres ON books.genre_id = genres.id
+		INNER JOIN authors ON books.author_id = authors.id,
+		INNER JOIN publishers ON books.publisher_id = publishers.id
+		INNER JOIN genres ON books.genre_id = genres.id
 		WHERE books.id = ?
 	`, id)
 
